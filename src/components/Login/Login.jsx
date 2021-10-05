@@ -16,10 +16,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useHistory } from "react-router-dom";
+
 import "./Login.css";
 import { loginService } from "../services/Auth_services";
 //import { validateEmail } from "../utils/utilities";
 function Login() {
+  const history = useHistory();
+
   const [usuario, setUsuario] = useState({});
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,25 +31,32 @@ function Login() {
 
   const inputHandler = ({ target: { name, value } }) => {
     setUsuario({ ...usuario, [name]: value });
-    console.log("usuario", usuario);
+    //console.log("usuario", usuario);
   };
 
   const sendLoginInfo = () => {
     if (usuario.email === undefined || usuario.email.length === 0) {
       setErrorMessage("Campo de Email Vacio");
-
       setShowError(true);
       return;
     }
     if (usuario.password === undefined || usuario.password.length === 0) {
       setErrorMessage("Password Requerido");
-
       setShowError(true);
       return;
     }
 
     setUsuario(usuario);
-    loginService(usuario);
+    loginService(usuario)
+      .then((result) => {
+        console.log("resultLogin", result);
+        history.push("/dashboard");
+      })
+      .catch((error) => {
+        console.log("Error CATCH 2", error.data);
+        setShowError(true);
+        setErrorMessage(error.data.message);
+      });
     console.log(usuario.email, usuario.password);
   };
 

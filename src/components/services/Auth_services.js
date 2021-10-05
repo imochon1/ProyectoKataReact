@@ -3,13 +3,18 @@ import axios from "axios";
 import { URL_BACKEND } from "../utils/url_base";
 
 export const loginService = (body) => {
-  axios
-    .post(`${URL_BACKEND}`, body)
-    .then((data) => {
-      console.log(data);
-      return data;
-    })
-    .catch((error) => {
-      console.log("Error", error);
-    });
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${URL_BACKEND}`, body)
+      .then((response) => {
+        const { data, status } = response;
+        console.log("data", data);
+        console.log("status", status);
+        resolve(data);
+      })
+      .catch(({ response }) => {
+        //console.log(" CATCH Error", error);
+        reject(response);
+      });
+  });
 };
