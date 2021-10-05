@@ -1,0 +1,22 @@
+.card-container {
+  background: url("C:\Users\mocho\Desktop\Master\Modulo4\ProyectoKataReact\proyectokr\src\components\Login\milky-way-2695569__480.jpg")
+    no-repeat center center fixed;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 800px;
+}
+
+.card {
+  width: 300px;
+  height: 480px;
+  text-align: center;
+  background-color: rgb(251, 251, 251) !important;
+  opacity: 0.9;
+}
+
+.loginWrapper {
+  text-align: center;
+}
