@@ -8,13 +8,15 @@ import {
   Button,
 } from "@mui/material/";
 import SendIcon from "@mui/icons-material/Send";
+import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "./Login.css";
 function Login() {
   // eslint-disable-next-line no-unused-vars
-  const [email, setEmail] = useState("");
   // eslint-disable-next-line no-unused-vars
 
   const [usuario, setUsuario] = useState({});
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleEmail = ({ target }) => {
     setEmail(target.value);
@@ -24,6 +26,10 @@ function Login() {
   const handlePassword = ({ target }) => {
     setPassword(target.value);
     console.log("handlechange", password);
+  };
+
+  const sendLoginInfo = () => {
+    console.log("email:", email, "password:", password);
   };
 
   return (
@@ -38,7 +44,9 @@ function Login() {
         autoComplete="off"
       >
         <FormControl>
-          <InputLabel htmlFor="component-outlined">Name</InputLabel>
+          <InputLabel htmlFor="component-outlined">
+            <AlternateEmailOutlinedIcon />
+          </InputLabel>
           <OutlinedInput
             id="component-outlined"
             value={email}
@@ -57,7 +65,9 @@ function Login() {
         autoComplete="off"
       >
         <FormControl>
-          <InputLabel htmlFor="component-outlined">Name</InputLabel>
+          <InputLabel htmlFor="component-outlined">
+            <LockOutlinedIcon />
+          </InputLabel>
           <OutlinedInput
             id="component-outlined"
             value={password}
@@ -75,7 +85,11 @@ function Login() {
         noValidate
         autoComplete="off"
       >
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={sendLoginInfo}
+        >
           Send
         </Button>
       </Box>
