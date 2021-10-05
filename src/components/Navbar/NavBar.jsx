@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-//import Items from "../Items/Items";
+
 export const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -31,6 +31,7 @@ export const NavBar = () => {
               Items
             </Typography>
           </Link>
+
           <Link to="dashboard/perfil">
             <Button color="inherit">Perfil</Button>
           </Link>

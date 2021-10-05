@@ -5,7 +5,7 @@ import { URL_BACKEND } from "../utils/url_base";
 export const loginService = (body) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${URL_BACKEND}`, body)
+      .post(`${URL_BACKEND}/login`, body)
       .then((response) => {
         const { data, status } = response;
         console.log("data", data);
