@@ -8,16 +8,22 @@ import {
   Button,
   Card,
   CardContent,
+  Collapse,
+  Alert,
 } from "@mui/material/";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "./Login.css";
+import { loginService } from "../services/Auth_services";
 //import { validateEmail } from "../utils/utilities";
 function Login() {
   const [usuario, setUsuario] = useState({});
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = React.useState(true);
 
   const inputHandler = ({ target: { name, value } }) => {
     setUsuario({ ...usuario, [name]: value });
@@ -27,18 +33,19 @@ function Login() {
   const sendLoginInfo = () => {
     if (usuario.email === undefined || usuario.email.length === 0) {
       setErrorMessage("Campo de Email Vacio");
-      alert(errorMessage);
+
       setShowError(true);
       return;
     }
     if (usuario.password === undefined || usuario.password.length === 0) {
       setErrorMessage("Password Requerido");
-      alert(errorMessage);
+
       setShowError(true);
       return;
     }
 
     setUsuario(usuario);
+    loginService(usuario);
     console.log(usuario.email, usuario.password);
   };
 
@@ -108,6 +115,28 @@ function Login() {
             </Button>
           </Box>
         </CardContent>
+        {showError && (
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              {errorMessage}
+            </Alert>
+          </Collapse>
+        )}
       </Card>
     </div>
   );
