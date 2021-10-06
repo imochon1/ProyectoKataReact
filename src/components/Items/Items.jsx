@@ -1,38 +1,91 @@
-import React, { useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useContext, useState } from "react";
+
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { itemService } from "../services/Auth_services";
+
 const Items = () => {
-  //const [objetos, setObjetos] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [filteredObjects, setFilteredObjects] = useState([]);
+  const [objetos, setObjetos] = useState([]);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    let arrayObject = [];
+
     itemService()
       .then((result) => {
-        // eslint-disable-next-line no-unused-vars
-        result.map((item, index) => {
-          // eslint-disable-next-line no-unused-vars
-          const { _id, product_name, category, price, image } = item;
-          console.log(
-            "id",
-            _id,
-            "product_name",
-            product_name,
-            "category",
-            category,
-            "precio",
-            price
-          );
-        });
-
-        history.push("/dashboard/items");
+        setObjetos(result);
+        setFilteredObjects(result);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  const selectorHandler = (event) => {
+    console.log("Selector Value", event.target.value);
+    setCategory(event.target.value);
+    console.log("category", category);
+  };
+
+  useEffect(() => {
+    console.log("UseEffect category", category);
+    const copyArray = [...objetos];
+    const result = copyArray.filter((element) => element.category === category);
+    console.log("category", category);
+    console.log("result", result);
+    setFilteredObjects(result);
+  }, [category]);
+
   return (
-    <>
-      <h3>Hola</h3>
-    </>
+    <div>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Category"
+            value={category}
+            onChange={(e) => selectorHandler(e)}
+          >
+            <MenuItem value="Kids">Kids</MenuItem>
+            <MenuItem value="Shoes">Shoes</MenuItem>
+            <MenuItem value="Computers">Computers</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Boletos disponibles</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredObjects?.length > 0 ? (
+              filteredObjects.map((objeto, index) => (
+                <tr key={index}>
+                  <td>{objeto.price}</td>
+                  <td>{objeto.category}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td>No hay películas en la Cartelera</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

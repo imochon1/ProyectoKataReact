@@ -5,6 +5,7 @@ import Items from "../Items/Items";
 // eslint-disable-next-line no-unused-vars
 import Perfil from "../Perfil/Perfil";
 import Usuarios from "../Usuarios/Usuarios";
+import CreateArticle from "../CreateArticle/CreateArticle";
 
 const Dashboard = () => {
   return (
@@ -14,9 +15,9 @@ const Dashboard = () => {
         <Switch>
           <Route path="/dashboard/items" component={Items} />
           <Route path="/dashboard/usuarios" component={Usuarios} />
+          <Route path="/dashboard/crear_articulo" component={CreateArticle} />
         </Switch>
       </Router>
-      <h2>Dashboard</h2>
     </>
   );
 };
