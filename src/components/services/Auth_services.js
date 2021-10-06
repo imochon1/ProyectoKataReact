@@ -18,3 +18,18 @@ export const loginService = (body) => {
       });
   });
 };
+
+export const itemService = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${URL_BACKEND}/item`)
+      .then((response) => {
+        const { data, status } = response;
+        console.log("Status", status);
+        resolve(data);
+      })
+      .catch(({ response }) => {
+        reject(response);
+      });
+  });
+};

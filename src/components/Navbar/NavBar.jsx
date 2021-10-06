@@ -8,6 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import Usuarios from "../Usuarios/Usuarios";
+import { itemService } from "../services/Auth_services";
 
 export const NavBar = () => {
   return (
@@ -27,13 +30,18 @@ export const NavBar = () => {
           </Link>
 
           <Link to="/dashboard/items">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+              onClick={() => itemService()}
+            >
               Items
             </Typography>
           </Link>
 
-          <Link to="dashboard/perfil">
-            <Button color="inherit">Perfil</Button>
+          <Link to="/dashboard/usuarios">
+            <Button color="inherit">Usuarios</Button>
           </Link>
         </Toolbar>
       </AppBar>
