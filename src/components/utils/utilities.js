@@ -4,3 +4,16 @@ export const validateEmail = (email) => {
 
   return emailRegEx.test(email);
 };
+
+export const decodedJWT = (jwtParams) => {
+  // eslint-disable-next-line no-unused-vars
+  const [header, payload, signature] = jwtParams.split(".");
+
+  const payloadFortmatted = payload.replace("-", "+").replace("_", "/");
+
+  // eslint-disable-next-line no-unused-vars
+  const payloadData = JSON.parse(atob(payloadFortmatted));
+
+  return payloadData;
+  //console.log("payloadData", payloadData);
+};

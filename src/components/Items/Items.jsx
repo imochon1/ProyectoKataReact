@@ -6,7 +6,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import SearchIcon from "@mui/icons-material/Search";
 import { itemService } from "../services/Auth_services";
+import Search from "@mui/icons-material/Search";
 
 const Items = () => {
   // eslint-disable-next-line no-unused-vars
@@ -37,10 +39,12 @@ const Items = () => {
   useEffect(() => {
     console.log("UseEffect category", category);
     const copyArray = [...objetos];
-    const result = copyArray.filter((element) => element.category === category);
+    const resultCategory = copyArray.filter(
+      (element) => element.category === category
+    );
     console.log("category", category);
-    console.log("result", result);
-    setFilteredObjects(result);
+    console.log("result", resultCategory);
+    setFilteredObjects(resultCategory);
   }, [category]);
 
   return (
@@ -60,13 +64,16 @@ const Items = () => {
             <MenuItem value="Computers">Computers</MenuItem>
           </Select>
         </FormControl>
+        <Search>
+          <SearchIcon />
+        </Search>
       </Box>
       <div>
         <table>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Boletos disponibles</th>
+              <th>Precio</th>
+              <th>Categoria</th>
             </tr>
           </thead>
           <tbody>

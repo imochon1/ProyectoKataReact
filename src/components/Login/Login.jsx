@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   FormControl,
   InputLabel,
@@ -20,6 +20,8 @@ import { useHistory } from "react-router-dom";
 
 import "./Login.css";
 import { loginService } from "../services/Auth_services";
+import { decodedJWT } from "../utils/utilities";
+import { UserLoggedContext } from "../../context/userContext";
 //import { validateEmail } from "../utils/utilities";
 function Login() {
   const history = useHistory();
@@ -28,6 +30,8 @@ function Login() {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = React.useState(true);
+
+  const { globalUser, setGlobalUser } = useContext(UserLoggedContext);
 
   const inputHandler = ({ target: { name, value } }) => {
     setUsuario({ ...usuario, [name]: value });
@@ -48,9 +52,19 @@ function Login() {
 
     setUsuario(usuario);
     loginService(usuario)
-      .then((result) => {
-        console.log("resultLogin", result);
+      .then(({ token }) => {
+        console.log("resultLogin", token);
+        const payload = decodedJWT(token);
+        console.log("Payload Login", payload);
         history.push("/dashboard");
+        console.log("GlobalUser", globalUser);
+        const { id, role, exp } = payload;
+
+        setGlobalUser({
+          id,
+          role,
+          expiration: exp,
+        });
       })
       .catch((error) => {
         console.log("Error CATCH 2", error.data);

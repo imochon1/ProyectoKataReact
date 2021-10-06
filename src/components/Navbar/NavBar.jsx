@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
@@ -13,6 +16,38 @@ import Usuarios from "../Usuarios/Usuarios";
 import { itemService } from "../services/Auth_services";
 
 export const NavBar = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [showMenu, setShowMenu] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    setShowMenu(true);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setShowMenu(false);
+  };
+
+  const renderMenu = (
+    <Menu
+      id="menu-appbar"
+      keepMounted
+      anchorEl={anchorEl}
+      open={showMenu}
+      onClose={handleMenuClose}
+    >
+      <Link
+        to="dashboard/mi-perfil"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <MenuItem onClick={handleMenuClose}>Mi Perfil</MenuItem>
+      </Link>
+      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <MenuItem>Cerrar sesión</MenuItem>
+      </Link>
+    </Menu>
+  );
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -43,8 +78,30 @@ export const NavBar = () => {
           <Link to="/dashboard/usuarios">
             <Button color="inherit">Usuarios</Button>
           </Link>
+
+          <Link to="/dashboard/Crear_usuario">
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              Crear Usuario
+            </Typography>
+          </Link>
+
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="Current USer"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleMenuOpen}
+            >
+              <AccountCircle />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+      {renderMenu}
     </Box>
   );
 };
