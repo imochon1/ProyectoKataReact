@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import { UserProvider, UserLoggedContext } from "./context/userContext";
 import NotFound from "./components/NotFound/NotFound";
+import PrivateRoute from "./components/helpers/PrivateRoute";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
                 <Route exact path="/">
                   <Login />
                 </Route>
-
+                <PrivateRoute exact component={Dashboard} path="/dashboard" />
                 <Route path="/dashboard">
                   <Dashboard />
                 </Route>

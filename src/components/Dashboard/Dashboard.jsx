@@ -1,12 +1,13 @@
 import React from "react";
 import { NavBar } from "../Navbar/NavBar";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { Switch, useRouteMatch } from "react-router-dom";
 import Items from "../Items/Items";
 // eslint-disable-next-line no-unused-vars
 import Perfil from "../Perfil/Perfil";
 import Usuarios from "../Usuarios/Usuarios";
 import CreateArticle from "../CreateArticle/CreateArticle";
 import CreateUser from "../CreateUser/CreateUser";
+import PrivateRoute from "../helpers/PrivateRoute";
 
 const Dashboard = () => {
   // eslint-disable-next-line no-unused-vars
@@ -16,10 +17,20 @@ const Dashboard = () => {
     <>
       <NavBar />
       <Switch>
-        <Route path={`${path}/items`} component={Items} />
-        <Route path={`${path}/usuarios`} component={Usuarios} />
-        <Route path={`${path}/crear_articulo`} component={CreateArticle} />
-        <Route path={`${path}/crear_usuario`} component={CreateUser} />
+        <PrivateRoute exact component={Items} path={`${path}/items`} />
+
+        <PrivateRoute exact component={Usuarios} path={`${path}/usuarios`} />
+
+        <PrivateRoute
+          exact
+          component={CreateArticle}
+          path={`${path}/crear_artiulo`}
+        />
+        <PrivateRoute
+          exact
+          component={CreateUser}
+          path={`${path}/crear_usuario`}
+        />
       </Switch>
     </>
   );
