@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,8 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-// eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+
 // eslint-disable-next-line no-unused-vars
 import Usuarios from "../Usuarios/Usuarios";
 import { itemService } from "../services/Auth_services";
@@ -20,10 +21,11 @@ export const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
 
-  const { globalUser } = useContext(UserLoggedContext);
-
+  const { globalUser, setGlobalUser } = useContext(UserLoggedContext);
   console.log("global user", globalUser);
-  // eslint-disable-next-line no-unused-vars
+
+  const history = useHistory();
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
     setShowMenu(true);
@@ -32,6 +34,11 @@ export const NavBar = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setShowMenu(false);
+  };
+
+  const logout = () => {
+    setGlobalUser({});
+    history.push("/");
   };
 
   const renderMenu = (
@@ -46,10 +53,11 @@ export const NavBar = () => {
         to="dashboard/mi-perfil"
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <MenuItem onClick={handleMenuClose}>Mi Perfil</MenuItem>
+        <MenuItem>Mi Perfil</MenuItem>
       </Link>
+
       <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-        <MenuItem>Cerrar sesión</MenuItem>
+        <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
       </Link>
     </Menu>
   );
@@ -79,19 +87,20 @@ export const NavBar = () => {
               Items
             </Typography>
           </Link>
-          {globalUser.role === "ADMIN" && (
-            <Link to="/dashboard/usuarios">
-              <Button color="inherit">Usuarios</Button>
-            </Link>
-          )}
-          {globalUser.role === "ADMIN" && (
-            <Link to="/dashboard/Crear_usuario">
-              <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Crear Usuario
-              </Typography>
-            </Link>
-          )}
 
+          {globalUser.role === "ADMIN" && (
+            <>
+              <Link to="/dashboard/usuarios">
+                <Button color="inherit">Usuarios</Button>
+              </Link>
+
+              <Link to="/dashboard/Crear_usuario">
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                  Crear Usuario
+                </Typography>
+              </Link>
+            </>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
