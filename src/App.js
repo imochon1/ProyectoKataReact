@@ -15,12 +15,12 @@ function App() {
       <Switch>
         <UserProvider>
           <UserLoggedContext.Consumer>
-            {(value) => (
+            {() => (
               <>
                 <Route exact path="/">
                   <Login />
                 </Route>
-                <PrivateRoute exact component={Dashboard} path="/dashboard" />
+
                 <Route path="/dashboard">
                   <Dashboard />
                 </Route>

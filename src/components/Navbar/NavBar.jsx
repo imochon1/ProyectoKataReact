@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -24,6 +24,7 @@ export const NavBar = () => {
   const { globalUser, setGlobalUser } = useContext(UserLoggedContext);
   console.log("global user", globalUser);
 
+  const { path } = useRouteMatch();
   const history = useHistory();
 
   const handleMenuOpen = (event) => {
@@ -65,7 +66,7 @@ export const NavBar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/dashboard">
+          <Link to={`${path}`}>
             <IconButton
               size="large"
               edge="start"
@@ -77,7 +78,7 @@ export const NavBar = () => {
             </IconButton>
           </Link>
 
-          <Link to="/dashboard/items">
+          <Link to={`${path}/items`}>
             <Typography
               variant="h6"
               component="div"

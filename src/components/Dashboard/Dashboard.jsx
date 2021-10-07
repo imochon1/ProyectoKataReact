@@ -9,26 +9,40 @@ import CreateArticle from "../CreateArticle/CreateArticle";
 import CreateUser from "../CreateUser/CreateUser";
 import PrivateRoute from "../helpers/PrivateRoute";
 
+import Main from "../Main/Main";
+
 const Dashboard = () => {
   // eslint-disable-next-line no-unused-vars
   const { path, url } = useRouteMatch();
-
+  console.log(path);
+  console.log(url);
   return (
     <>
       <NavBar />
-      <Switch>
-        <PrivateRoute exact component={Items} path={`${path}/items`} />
 
-        <PrivateRoute exact component={Usuarios} path={`${path}/usuarios`} />
+      <Switch>
+        <PrivateRoute exact component={() => <Main />} />
 
         <PrivateRoute
           exact
-          component={CreateArticle}
+          component={() => <Items />}
+          path={`${path}/items`}
+        />
+
+        <PrivateRoute
+          exact
+          component={() => <Usuarios />}
+          path={`${path}/usuarios`}
+        />
+
+        <PrivateRoute
+          exact
+          component={() => <CreateArticle />}
           path={`${path}/crear_artiulo`}
         />
         <PrivateRoute
           exact
-          component={CreateUser}
+          component={() => <CreateUser />}
           path={`${path}/crear_usuario`}
         />
       </Switch>

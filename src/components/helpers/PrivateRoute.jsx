@@ -10,11 +10,12 @@ const PrivateRoute = ({ component: Component }) => {
   return (
     <Route
       render={(props) => {
+        console.log(globalUser);
         if (Object.keys(globalUser).length === 0) {
-          console.log("GLobal User Vacio");
+          console.log("GLobal User Vacio", props);
+
           return <Redirect to={{ pathname: "/" }} />;
         }
-
         return <Component {...props} />;
       }}
     />
