@@ -72,6 +72,7 @@ const Items = () => {
         <table>
           <thead>
             <tr>
+              <th>Producto</th>
               <th>Precio</th>
               <th>Categoria</th>
             </tr>
@@ -80,6 +81,7 @@ const Items = () => {
             {filteredObjects?.length > 0 ? (
               filteredObjects.map((objeto, index) => (
                 <tr key={index}>
+                  <td>{objeto.product_name}</td>
                   <td>{objeto.price}</td>
                   <td>{objeto.category}</td>
                 </tr>

@@ -4,11 +4,11 @@ import React, { createContext, useState } from "react";
 const UserLoggedContext = createContext();
 
 const UserProvider = (props) => {
-  const [globalUser, setglobalUser] = useState({});
+  const [globalUser, setGlobalUser] = useState({});
 
   return (
     <UserLoggedContext.Provider
-      value={{ globalUser, setglobalUser }}
+      value={{ globalUser, setGlobalUser }}
       {...props}
     />
   );

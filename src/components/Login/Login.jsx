@@ -26,7 +26,7 @@ import { UserLoggedContext } from "../../context/userContext";
 function Login() {
   const history = useHistory();
 
-  const [usuario, setUsuario] = useState({});
+  const [usuario, setUsuario] = useState({}); //Sera el error por esto??
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = React.useState(true);
@@ -50,14 +50,11 @@ function Login() {
       return;
     }
 
-    setUsuario(usuario);
     loginService(usuario)
       .then(({ token }) => {
         console.log("resultLogin", token);
         const payload = decodedJWT(token);
         console.log("Payload Login", payload);
-        history.push("/dashboard");
-        console.log("GlobalUser", globalUser);
         const { id, role, exp } = payload;
 
         setGlobalUser({
@@ -65,11 +62,13 @@ function Login() {
           role,
           expiration: exp,
         });
+        console.log("GlobalUser", globalUser);
+        history.push("/dashboard");
       })
       .catch((error) => {
-        console.log("Error CATCH 2", error.data);
+        console.log("error", error.data);
         setShowError(true);
-        setErrorMessage(error.data.message);
+        setErrorMessage(error.data?.message || "Error generico");
       });
     console.log(usuario.email, usuario.password);
   };

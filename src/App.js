@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
@@ -13,7 +14,7 @@ function App() {
       <Switch>
         <UserProvider>
           <UserLoggedContext.Consumer>
-            {() => (
+            {(value) => (
               <>
                 <Route exact path="/">
                   <Login />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,10 +14,15 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import Usuarios from "../Usuarios/Usuarios";
 import { itemService } from "../services/Auth_services";
+import { UserLoggedContext } from "../../context/userContext";
 
 export const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [showMenu, setShowMenu] = React.useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const { globalUser } = useContext(UserLoggedContext);
+
+  console.log("global user", globalUser);
   // eslint-disable-next-line no-unused-vars
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
