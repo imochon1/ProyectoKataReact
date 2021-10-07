@@ -9,6 +9,8 @@ import { UserProvider, UserLoggedContext } from "./context/userContext";
 import NotFound from "./components/NotFound/NotFound";
 import PrivateRoute from "./components/helpers/PrivateRoute";
 import Items from "./components/Items/Items";
+import Usuarios from "./components/Usuarios/Usuarios";
+import CreateUser from "./components/CreateUser/CreateUser";
 
 function App() {
   return (
@@ -28,6 +30,13 @@ function App() {
 
                 <Route path="/dashboard/items">
                   <Items />
+                </Route>
+
+                <Route path="/dashboard/usuarios">
+                  <Usuarios />
+                </Route>
+                <Route path="/dashboard/crear_usuario">
+                  <CreateUser />
                 </Route>
               </>
             )}
