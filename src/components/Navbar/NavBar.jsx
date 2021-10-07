@@ -79,16 +79,18 @@ export const NavBar = () => {
               Items
             </Typography>
           </Link>
-
-          <Link to="/dashboard/usuarios">
-            <Button color="inherit">Usuarios</Button>
-          </Link>
-
-          <Link to="/dashboard/Crear_usuario">
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Crear Usuario
-            </Typography>
-          </Link>
+          {globalUser.role === "ADMIN" && (
+            <Link to="/dashboard/usuarios">
+              <Button color="inherit">Usuarios</Button>
+            </Link>
+          )}
+          {globalUser.role === "ADMIN" && (
+            <Link to="/dashboard/Crear_usuario">
+              <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                Crear Usuario
+              </Typography>
+            </Link>
+          )}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
