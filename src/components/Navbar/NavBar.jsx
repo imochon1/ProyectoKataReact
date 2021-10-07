@@ -95,7 +95,7 @@ export const NavBar = () => {
                 <Button color="inherit">Usuarios</Button>
               </Link>
 
-              <Link to="/dashboard/Crear_usuario">
+              <Link to="/dashboard/crear_usuario">
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                   Crear Usuario
                 </Typography>

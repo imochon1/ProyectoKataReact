@@ -24,9 +24,9 @@ const Dashboard = () => {
         <PrivateRoute exact component={() => <Main />} />
 
         <PrivateRoute
+          path={`${path}/items`}
           exact
           component={() => <Items />}
-          path={`${path}/items`}
         />
 
         <PrivateRoute
