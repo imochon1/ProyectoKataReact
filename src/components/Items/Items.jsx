@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import { itemService } from "../services/Auth_services";
 import Search from "@mui/icons-material/Search";
+import Input from "@mui/material/Input";
 
 const Items = () => {
   // eslint-disable-next-line no-unused-vars
@@ -47,6 +48,8 @@ const Items = () => {
     setFilteredObjects(resultCategory);
   }, [category]);
 
+  const ariaLabel = { "aria-label": "description" };
+
   return (
     <div>
       <Box sx={{ minWidth: 120 }}>
@@ -64,10 +67,23 @@ const Items = () => {
             <MenuItem value="Computers">Computers</MenuItem>
           </Select>
         </FormControl>
-        <Search>
-          <SearchIcon />
-        </Search>
       </Box>
+      <div style={{ textAlign: "center", marginTop: 25, marginBottom: 25 }}>
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+          style={{ marginTop: 75 }}
+        >
+          <Input placeholder="Buscar Precio " inputProps={ariaLabel}></Input>
+          <Search>
+            <SearchIcon />
+          </Search>
+        </Box>
+      </div>
       <div>
         <table>
           <thead>
