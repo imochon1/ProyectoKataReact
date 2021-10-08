@@ -10,6 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { itemService } from "../services/Auth_services";
 import Search from "@mui/icons-material/Search";
 import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
 
 const Items = () => {
   // eslint-disable-next-line no-unused-vars
@@ -79,6 +80,9 @@ const Items = () => {
           style={{ marginTop: 75 }}
         >
           <Input placeholder="Buscar Precio " inputProps={ariaLabel}></Input>
+          <Button variant="contained" style={{ alignItems: "center" }}>
+            Buscar Precio
+          </Button>
           <Search>
             <SearchIcon />
           </Search>
