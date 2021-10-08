@@ -1,0 +1,35 @@
+.header-item.MuiBox-root.css-ece9u5 {
+  padding: 2%;
+}
+.item-category {
+  width: 70%;
+}
+.item-content {
+  padding: 2%;
+}
+table {
+  width: 50%;
+}
+
+table {
+  border-collapse: collapse;
+}
+table,
+th,
+td {
+  border-bottom: 2px solid rgb(201, 201, 201);
+  padding: 1.5% 0;
+}
+
+head {
+  text-align: left;
+}
+
+.MuiTypography-root.MuiTypography-h6.css-1juivf6-MuiTypography-root {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:any-link {
+  text-decoration: none;
+}
